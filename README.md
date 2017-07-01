@@ -4,11 +4,38 @@ THavalon is Brown University Tech House's custom rules for The Resistance: Avalo
 
 ## Technology Used
 * Backend
+  * Python 3.6
   * Most likely [django](https://www.djangoproject.com/)
 * Frontend
   * If using django, then [django templating language](https://docs.djangoproject.com/en/1.11/topics/templates/)
 * Database
-  * Some sort of noSQL database
+  * Probably mongoDB
 
 ## TODO List
+* Set up full stack communication
+  * Create Server
+    * Ensure can load basic webpage
 
+* Set up database
+  
+* Create Game (backend)
+  * 
+
+## Dev Environment
+An overview of what I did to set up my dev environment. I am using Bash for Windows 10, it should be similar for Mac and Linux. If using Windows, I would strongly recommend installing [bash for windows 10](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide).
+
+1. Install python3.6
+  * [Mac](https://www.python.org/downloads/release/python-361/)
+  * [Linux/Bash for Windows](https://askubuntu.com/questions/865554/how-do-i-install-python-3-6-using-apt-get)
+2. [Optional] Set up virtual environment
+  * Recommended for running django, so can install project specific packages
+  * [Django virtualenv instructions](https://docs.djangoproject.com/en/1.11/intro/contributing/#getting-a-copy-of-django-s-development-version) (Scroll down a bit)
+  * Mac/Linux: `python3.6 -m venv ~/.virtualenvs/djangodev`
+  * Bash for Windows: `pip3 install virtualenv` then `virtualenv -p python3.6 ~/.virtualenvs/djangodev`
+  * To run the virtual environment, run `source ~/.virtualenvs/djangodev/bin/activate`
+3. Install django
+  * In the virtual environment, `pip3 install Django`
+  * Bash for Windows: You may need to manually install pip in the virtual environment first. To do so, download get-pip.py from [here](https://pip.pypa.io/en/latest/installing/#installing-with-get-pip-py) and run `python3.6 /path/to/get-pip.py`
+  * To confirm django is installed, run `python -m django --version`. If the version is printed (currently 1.11.2), the install is complete
+4. Install mongoDB
+  * Coming soon
