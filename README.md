@@ -6,7 +6,7 @@ THavalon is Brown University Tech House's custom rules for The Resistance: Avalo
 * Backend
   * Most likely [django](https://www.djangoproject.com/)
 * Frontend
-  * Some sort of HTML templating langauge
+  * If using django, then [django templating language](https://docs.djangoproject.com/en/1.11/topics/templates/)
 * Database
   * Some sort of noSQL database
 
