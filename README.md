@@ -36,6 +36,7 @@ THavalon is Brown University Tech House's custom rules for The Resistance: Avalo
         * Player name
         * Player password
         * Role Text (what user would have seen in text file in original version)
+        * If created game (for starting game and removing players from lobby)
       * Start time
       * End time
       * Other info tbd (such as mission results, would need to be manually entered at game end)
@@ -43,13 +44,34 @@ THavalon is Brown University Tech House's custom rules for The Resistance: Avalo
 * Create home page
   * Ability to start new lobbies
   * Ability to view active games and open lobbies
+    * Should be able to search/filter by game name
+    * Should be able to filter by status (show in lobby only or active games only)
+    * Should show start time and number of players
   * Ability to join open lobby
   
 * Create lobby
+  * From home page, ability to create new lobby
+  * Lobby must have name and optional password
 
 * Join lobby
-
-* Start game from lobby
+  * From lobby browser on phone, ability to join a lobby
+  * If new player, must enter:
+    * username (must not be used)
+    * password (if we do that option)
+    * confirm password (if we do that option)
+  * If returning player
+    * username (must exist in game)
+    * password
+  
+* In lobby
+  * Ability to view lobby name
+  * Ability to view other players
+  * Before starting game
+    * If game creator
+      * Ability to remove players
+      * Ability to start game (should this be open to everyone?)
+  * Once game started
+    * Ability to end game and optionally enter game data (should this be game creator only?)
 
 ## Dev Environment
 An overview of what I did to set up my dev environment. I am using Bash for Windows 10, it should be similar for Mac and Linux. If using Windows, I would strongly recommend installing [bash for windows 10](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide).
