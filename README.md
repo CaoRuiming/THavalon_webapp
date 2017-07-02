@@ -17,9 +17,39 @@ THavalon is Brown University Tech House's custom rules for The Resistance: Avalo
     * Ensure can load basic webpage
 
 * Set up database
+  * Need to be able to store the following:
+    * Role Info
+      * Name
+      * Flavor text
+      * What is seen (i.e., knows all evil, knows lover exactly, etc.)
+      * Abilities
+    * Abilities
+      * Name 
+      * Description
+      * Ex: Reversal. Store in separate table since multiple roles can may be able to have same ability
+    * Games
+      * Game id
+      * Status (in lobby, active, ended)
+      * Lobby name
+      * Lobby password (optional)
+      * For each player
+        * Player name
+        * Player password
+        * Role Text (what user would have seen in text file in original version)
+      * Start time
+      * End time
+      * Other info tbd (such as mission results, would need to be manually entered at game end)
+    
+* Create home page
+  * Ability to start new lobbies
+  * Ability to view active games and open lobbies
+  * Ability to join open lobby
   
-* Create Game (backend)
-  * 
+* Create lobby
+
+* Join lobby
+
+* Start game from lobby
 
 ## Dev Environment
 An overview of what I did to set up my dev environment. I am using Bash for Windows 10, it should be similar for Mac and Linux. If using Windows, I would strongly recommend installing [bash for windows 10](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide).
