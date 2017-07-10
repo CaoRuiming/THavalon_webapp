@@ -5,11 +5,13 @@ THavalon is Brown University Tech House's custom rules for The Resistance: Avalo
 ## Technology Used
 * Backend
   * Python 3.6
-  * Most likely [django](https://www.djangoproject.com/)
+  * [django](https://www.djangoproject.com/)
 * Frontend
+  * HTML/CSS
+  * JavaScript
   * If using django, then [django templating language](https://docs.djangoproject.com/en/1.11/topics/templates/)
 * Database
-  * Probably mongoDB
+  * PostgreSQL
 
 ## TODO List
 * Set up full stack communication
@@ -89,5 +91,3 @@ An overview of what I did to set up my dev environment. I am using Bash for Wind
   * In the virtual environment, `pip3 install Django`
   * Bash for Windows: You may need to manually install pip in the virtual environment first. To do so, download get-pip.py from [here](https://pip.pypa.io/en/latest/installing/#installing-with-get-pip-py) and run `python3.6 /path/to/get-pip.py`
   * To confirm django is installed, run `python -m django --version`. If the version is printed (currently 1.11.2), the install is complete
-4. Install mongoDB
-  * Coming soon
