@@ -94,7 +94,11 @@ An overview of what I did to set up my dev environment. I am using Bash for Wind
 4. Install MySQL
   * Mac: ???
   * Bash for Windows: 
-    * `sudo apt-get install mysql-client`,`sudo apt-get install mysql-server-core-5.5`, `sudo apt-get install mysql-server`
+    * `sudo apt-get install mysql-client`
+    * `sudo apt-get install mysql-server-core-5.5`
+    * `sudo apt-get install mysql-server`
+    * `sudo apt-get install libmysqlclient-dev`
+    * `sudo pip3 install mysqlclient` (see below for instructions if errors occur, make sure to use sudo)
     * `sudo service mysql start`
   * All: 
     * `mysql -u root -p` then password you created when installing mysql
@@ -103,3 +107,11 @@ An overview of what I did to set up my dev environment. I am using Bash for Wind
     * `mysql -u colgrevance -p` then thavalon for password
     * `CREATE TABLE thavalon CHARACTER SET utf8;` then `USE thavalon;` to make the database
     * `exit` to quit mysql
+  * If errors occur when trying to install mysqlclient:
+    * Check out [this link](https://askubuntu.com/questions/428198/getting-installing-gcc-g-4-9-on-ubuntu). It has some instructions on upgrading to gcc 4.9 so django will be able to install mysqlclient. You will also need to run the following:
+      * `cd /usr/bin`, `sudo rm x86_64-linux-gnu-gcc`, `sudo ln -s gcc-4.9 x86_64-linux-gnu-gcc`
+    * 
+    * Try `sudo apt-get install python-dev python3-dev`
+    * If above don't work, also try `sudo apt-get install libxml2-dev libxslt1-dev libpq-dev `
+    * Ok so I'm still getting an error, am probably going to try downgrading to python2.7 and starting from scratch at some point in the next few days
+
