@@ -9,9 +9,9 @@ THavalon is Brown University Tech House's custom rules for The Resistance: Avalo
 * Frontend
   * HTML/CSS
   * JavaScript
-  * If using django, then [django templating language](https://docs.djangoproject.com/en/1.11/topics/templates/)
+  * [django templating language](https://docs.djangoproject.com/en/1.11/topics/templates/)
 * Database
-  * PostgreSQL
+  * MySQL
 
 ## TODO List
 * Set up full stack communication
@@ -91,3 +91,15 @@ An overview of what I did to set up my dev environment. I am using Bash for Wind
   * In the virtual environment, `pip3 install Django`
   * Bash for Windows: You may need to manually install pip in the virtual environment first. To do so, download get-pip.py from [here](https://pip.pypa.io/en/latest/installing/#installing-with-get-pip-py) and run `python3.6 /path/to/get-pip.py`
   * To confirm django is installed, run `python -m django --version`. If the version is printed (currently 1.11.2), the install is complete
+4. Install MySQL
+  * Mac: ???
+  * Bash for Windows: 
+    * `sudo apt-get install mysql-client`,`sudo apt-get install mysql-server-core-5.5`, `sudo apt-get install mysql-server`
+    * `sudo service mysql start`
+  * All: 
+    * `mysql -u root -p` then password you created when installing mysql
+    * So we all have the same user, run `GRANT ALL PRIVILEGES ON *.* TO 'colgrevance'@'localhost' IDENTIFIED BY 'thavalon';` in the SQL terminal. This will create the user colgrevance with password thavalon for everyone. This is a huge security risk normally, but we need a user for the settings file, and it's easier to upload a settings file than ignore it. 
+    * `exit` to quit mysql
+    * `mysql -u colgrevance -p` then thavalon for password
+    * `CREATE TABLE thavalon CHARACTER SET utf8;` then `USE thavalon;` to make the database
+    * `exit` to quit mysql
