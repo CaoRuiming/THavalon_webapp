@@ -4,7 +4,7 @@ THavalon is Brown University Tech House's custom rules for The Resistance: Avalo
 
 ## Technology Used
 * Backend
-  * Python 3.6
+  * Python 2.7.13
   * [django](https://www.djangoproject.com/)
 * Frontend
   * HTML/CSS
@@ -78,27 +78,24 @@ THavalon is Brown University Tech House's custom rules for The Resistance: Avalo
 ## Dev Environment
 An overview of what I did to set up my dev environment. I am using Bash for Windows 10, it should be similar for Mac and Linux. If using Windows, I would strongly recommend installing [bash for windows 10](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide).
 
-1. Install python3.6
-  * [Mac](https://www.python.org/downloads/release/python-361/)
-  * [Linux/Bash for Windows](https://askubuntu.com/questions/865554/how-do-i-install-python-3-6-using-apt-get)
+1. Install python2.7
+  * [Mac](https://www.python.org/downloads/release/python-2713/)
+  * [Linux/Bash for Windows](https://tecadmin.net/install-python-2-7-on-ubuntu-and-linuxmint/)
 2. [Optional] Set up virtual environment
   * Recommended for running django, so can install project specific packages
   * [Django virtualenv instructions](https://docs.djangoproject.com/en/1.11/intro/contributing/#getting-a-copy-of-django-s-development-version) (Scroll down a bit)
-  * Mac/Linux: `python3.6 -m venv ~/.virtualenvs/djangodev`
-  * Bash for Windows: `pip3 install virtualenv` then `virtualenv -p python3.6 ~/.virtualenvs/djangodev`
+  * Mac/Linux: `python2.7 -m venv ~/.virtualenvs/djangodev`
+  * Bash for Windows: `pip install virtualenv` then `virtualenv -p python2.7 ~/.virtualenvs/djangodev`
   * To run the virtual environment, run `source ~/.virtualenvs/djangodev/bin/activate`
 3. Install django
-  * In the virtual environment, `pip3 install Django`
-  * Bash for Windows: You may need to manually install pip in the virtual environment first. To do so, download get-pip.py from [here](https://pip.pypa.io/en/latest/installing/#installing-with-get-pip-py) and run `python3.6 /path/to/get-pip.py`
+  * In the virtual environment, `pip install Django`
+  * Bash for Windows: You may need to manually install pip in the virtual environment first. To do so, download get-pip.py from [here](https://pip.pypa.io/en/latest/installing/#installing-with-get-pip-py) and run `python /path/to/get-pip.py`
   * To confirm django is installed, run `python -m django --version`. If the version is printed (currently 1.11.2), the install is complete
 4. Install MySQL
   * Mac: ???
   * Bash for Windows: 
-    * `sudo apt-get install mysql-client`
-    * `sudo apt-get install mysql-server-core-5.5`
-    * `sudo apt-get install mysql-server`
-    * `sudo apt-get install libmysqlclient-dev`
-    * `sudo pip3 install mysqlclient` (see below for instructions if errors occur, make sure to use sudo)
+    * `sudo apt-get install mysql-client mysql-server-core-5.5 mysql-server libmysqlclient-dev`
+    * `pip install mysqlclient` (see below for instructions if errors occur, may need sudo)
     * `sudo service mysql start`
   * All: 
     * `mysql -u root -p` then password you created when installing mysql
@@ -107,7 +104,7 @@ An overview of what I did to set up my dev environment. I am using Bash for Wind
     * `mysql -u colgrevance -p` then thavalon for password
     * `CREATE TABLE thavalon CHARACTER SET utf8;` then `USE thavalon;` to make the database
     * `exit` to quit mysql
-  * If errors occur when trying to install mysqlclient:
+  * If errors occur when trying to install mysqlclient (NOTE: These may not fix anything, are left over from using python 3.6. Downgrade to python 2.7 fixed mysql, unsure if these do anything with 2.7):
     * Check out [this link](https://askubuntu.com/questions/428198/getting-installing-gcc-g-4-9-on-ubuntu). It has some instructions on upgrading to gcc 4.9 so django will be able to install mysqlclient. You will also need to run the following:
       * `cd /usr/bin`, `sudo rm x86_64-linux-gnu-gcc`, `sudo ln -s gcc-4.9 x86_64-linux-gnu-gcc`
     * 
