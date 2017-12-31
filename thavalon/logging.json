@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "disable_existing_loggers": true,
+  "formatters": {
+    "console": {
+      "()": "coloredlogs.ColoredFormatter",
+      "fmt": "%(asctime)s %(levelname)8s [%(name)25s] : %(message)s"
+    }
+  },
+  "handlers": {
+    "stdout": {
+      "class": "logging.StreamHandler",
+      "level": "DEBUG",
+      "formatter": "console",
+      "stream": "ext://sys.stdout"
+    }
+  },
+  "loggers": {
+    "thavalon": {
+      "level": "DEBUG",
+      "handlers": ["stdout"]
+    }
+  }
+}
