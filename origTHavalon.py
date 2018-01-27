@@ -87,7 +87,7 @@ def game_serve(user):
 #@crossdomain(origin='*')
 def main():
 	players = request.args.getlist('player')
-	if not (6 <= len(players) <= 11):
+	if not (5 <= len(players) <= 10):
 		print("Invalid number of players")
 		exit(1)
         num_players = len(players)
