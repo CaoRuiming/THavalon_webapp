@@ -71,17 +71,31 @@ def crossdomain(origin=None, methods=None, headers=None, max_age=21600,
 def index_serve():
 	return send_from_directory('.', 'index.html')
 
+@app.route('/css/<file>')
+def serve_css(file):
+	return send_from_directory('css', file)
+
 @app.route('/game/')
 def game_list_serve():
 	files = os.listdir('game')
 	return render_template('files.html', files=files)
 
+@app.route('/DoNotOpen/')
+def game_do_not_open():
+	with open('game/DoNotOpen', 'r') as file:
+                output = file.read().replace("\n", "<br>")
+	#print(output)
+	return output
+	#return send_from_directory('game', user)
+
 @app.route('/game/<user>')
 def game_serve(user):
 	#assert(os.stat(user))
 	with open('game/' + user, 'r') as file:
-		output = file.read()
+		output = "You are viewing the information of: " + user + "<br><br>" + file.read().replace("\n", "<br>")
 	#print(output)
+	if user == "DoNotOpen":
+		output = "Are you sure you wish to see DoNotOpen? <a href=\"/DoNotOpen\">Click here to view</a>"
 	return output
 	#return send_from_directory('game', user)
 
