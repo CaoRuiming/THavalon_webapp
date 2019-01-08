@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<script>
+$(document).ready(function(){
+    $("#newgame").click(function(){
+	    console.log("Creating Game");
+	    var players = $("#players").val().split(" ");
+	    url = "http://www.techhouse.org:5000/thavalon?"
+	    for (i = 0; i < players.length; i++){
+		url += "&player=" + players[i];
+	    }
+	    $.ajax({
+		    headers: { 'Access-Control-Allow-Origin' : '*' },
+		    url: url,
+		    type: "get",
+		    success: function (response) {
+			console.log("Success");
+		    },
+		    error: function (response) {
+			console.log("Error");
+			console.log(response);
+		    }
+	    });
+
+    });
+});
+</script>
+<h1>THavalon Web App</br></h1>
+Players (use spaces to separate names):<input type="text" id="players"></input></br>
+<button id="newgame" type="button">Create New Game</button>
+<form action="http://techhouse.org:5000/game">
+	<input type="submit" value="View Game" />
+</form>
+</body>
+</html>
