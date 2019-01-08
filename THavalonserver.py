@@ -8,6 +8,7 @@ import datetime
 import sys
 sys.path.insert(0, '/home/nreed/.web/THavalon')
 import THavalon
+import thavalon
 from os import listdir
 from os.path import isfile, join
 from datetime import timedelta
@@ -148,7 +149,7 @@ def main():
 		for p in currentPlayers:
 			if(p != "start" and p != "DoNotOpen"):
 				players.append(p)
-	THavalon.run_THavalon(players, gameroom)
+	thavalon.run_THavalon(players, gameroom)
 	return 'called script'
 			
 if __name__ == "__main__":
