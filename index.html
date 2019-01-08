@@ -5,20 +5,24 @@
 </head>
 <body>
 <script>
-$(document).ready(function(){
-    $("#newgame").click(function(){
-	    console.log("Creating Game");
+ function createGameFunc(event){
+            gameNum = event.data.param1;
+	    console.log("Creating Game" + gameNum.toString());
 	    var players = $("#players").val().split(" ");
 	    url = "http://www.techhouse.org:5000/thavalon?"
 	    for (i = 0; i < players.length; i++){
 		url += "&player=" + players[i];
 	    }
+            url += "&gameroom=" + gameNum;
 	    $.ajax({
 		    headers: { 'Access-Control-Allow-Origin' : '*' },
 		    url: url,
 		    type: "get",
 		    success: function (response) {
 			console.log("Success");
+    			populateGameTime(1);
+    			populateGameTime(2);
+    			populateGameTime(3);
 		    },
 		    error: function (response) {
 			console.log("Error");
@@ -26,14 +30,61 @@ $(document).ready(function(){
 		    }
 	    });
 
-    });
+    }
+function populateGameTime(gameNum){
+	    console.log("Populating Game Time " + gameNum.toString());
+	    url = "http://www.techhouse.org:5000/gametime?"
+            url += "&gameroom=" + gameNum;
+	    $.ajax({
+		    headers: { 'Access-Control-Allow-Origin' : '*' },
+		    url: url,
+		    type: "get",
+		    success: function (response) {
+			$('#modified' + gameNum.toString()).text(response);
+			console.log("Success");
+		    },
+		    error: function (response) {
+			console.log("Error");
+			console.log(response);
+		    }
+	    });
+}
+
+    
+$(document).ready(function(){
+    populateGameTime(1);
+    populateGameTime(2);
+    populateGameTime(3);
+    $("#newgame").click({param1: 1}, createGameFunc);
+    $("#newgame2").click({param1: 2}, createGameFunc);
+    $("#newgame3").click({param1: 3}, createGameFunc);
 });
 </script>
 <h1>THavalon Web App</br></h1>
 Players (use spaces to separate names):<input type="text" id="players"></input></br>
-<button id="newgame" type="button">Create New Game</button>
-<form action="http://techhouse.org:5000/game">
-	<input type="submit" value="View Game" />
+</br>
+</br>
+<div> --- Game 1 --- </div>
+<div>Last created at: <div id="modified1"></div></div>
+<button id="newgame" type="button">Create New Game 1</button>
+<form action="http://techhouse.org:5000/game1">
+	<input type="submit" value="View Game 1" />
+</form>
+</br>
+</br>
+<div> --- Game 2 --- </div>
+<div>Last created at:<div id="modified2"></div></div>
+<button id="newgame2" type="button">Create New Game 2</button>
+<form action="http://techhouse.org:5000/game2">
+	<input type="submit" value="View Game 2" />
+</form>
+</br>
+</br>
+<div> --- Game 3 --- </div>
+<div>Last created at:<div id="modified3"></div></div>
+<button id="newgame3" type="button">Create New Game 3</button>
+<form action="http://techhouse.org:5000/game3">
+	<input type="submit" value="View Game 3" />
 </form>
 </body>
 </html>
