@@ -8,6 +8,8 @@ import datetime
 import sys
 sys.path.insert(0, '/home/nreed/.web/THavalon')
 import THavalon
+from os import listdir
+from os.path import isfile, join
 from datetime import timedelta
 from functools import update_wrapper
 from flask import Flask, request, send_from_directory, render_template, make_response
@@ -134,8 +136,18 @@ def game_get_time():
 @app.route('/thavalon', methods=['GET', 'OPTIONS'])
 #@crossdomain(origin='*')
 def main():
-	players = request.args.getlist('player')
         gameroom = request.args.getlist('gameroom')
+	players = request.args.getlist('player')
+	if(len(players) == 0):
+		path = "game1"
+		if(gameroom == 2):
+			path = "game2"
+		if(gameroom == 3):
+			path = "game3"
+		currentPlayers = [f for f in listdir(path) if isfile(join(path,f))]
+		for p in currentPlayers:
+			if(p != "start" and p != "DoNotOpen"):
+				players.append(p)
 	THavalon.run_THavalon(players, gameroom)
 	return 'called script'
 			

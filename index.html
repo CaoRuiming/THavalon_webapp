@@ -2,9 +2,40 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+.flex-container {
+	display: flex;
+	justify-content: space-around;
+}
+.game-div {
+	font-size: x-large;
+}
+</style>
 </head>
 <body>
 <script>
+function rerollGameFunc(event){
+            gameNum = event.data.param1;
+	    console.log("Rerolling Game" + gameNum.toString());
+	    url = "http://www.techhouse.org:5000/thavalon?"
+            url += "&gameroom=" + gameNum;
+	    $.ajax({
+		    headers: { 'Access-Control-Allow-Origin' : '*' },
+		    url: url,
+		    type: "get",
+		    success: function (response) {
+			console.log("Success");
+    			populateGameTime(1);
+    			populateGameTime(2);
+    			populateGameTime(3);
+		    },
+		    error: function (response) {
+			console.log("Error");
+			console.log(response);
+		    }
+	    });
+}
+    
  function createGameFunc(event){
             gameNum = event.data.param1;
 	    console.log("Creating Game" + gameNum.toString());
@@ -58,33 +89,43 @@ $(document).ready(function(){
     $("#newgame").click({param1: 1}, createGameFunc);
     $("#newgame2").click({param1: 2}, createGameFunc);
     $("#newgame3").click({param1: 3}, createGameFunc);
+    $("#rerollgame").click({param1: 1}, rerollGameFunc);
+    $("#rerollgame2").click({param1: 2}, rerollGameFunc);
+    $("#rerollgame3").click({param1: 3}, rerollGameFunc);
 });
 </script>
 <h1>THavalon Web App</br></h1>
 Players (use spaces to separate names):<input type="text" id="players"></input></br>
 </br>
 </br>
+<div class="flex-container">
+<div class="game-div">
 <div> --- Game 1 --- </div>
 <div>Last created at: <div id="modified1"></div></div>
 <button id="newgame" type="button">Create New Game 1</button>
+<button id="rerollgame" type="button">Reroll Game 1</button>
 <form action="http://techhouse.org:5000/game1">
 	<input type="submit" value="View Game 1" />
 </form>
-</br>
-</br>
+</div>
+<div class="game-div">
 <div> --- Game 2 --- </div>
 <div>Last created at:<div id="modified2"></div></div>
 <button id="newgame2" type="button">Create New Game 2</button>
+<button id="rerollgame2" type="button">Reroll Game 2</button>
 <form action="http://techhouse.org:5000/game2">
 	<input type="submit" value="View Game 2" />
 </form>
-</br>
-</br>
+</div>
+<div class="game-div">
 <div> --- Game 3 --- </div>
 <div>Last created at:<div id="modified3"></div></div>
 <button id="newgame3" type="button">Create New Game 3</button>
+<button id="rerollgame3" type="button">Reroll Game 3</button>
 <form action="http://techhouse.org:5000/game3">
 	<input type="submit" value="View Game 3" />
 </form>
+</div>
+</div>
 </body>
 </html>
