@@ -79,9 +79,15 @@ def index_serve():
 def serve_css(file):
 	return send_from_directory('css', file)
 
-@app.route('/roles')
-def display_roles():
-	return send_from_directory('.', 'roles.html')
+@app.route('/roles_and_rules')
+def display_roles_and_rules():
+	output = ""
+	with open('templates/roles_and_rules.html', 'r') as role:
+		output += role.read()
+	output += "<br><br>"
+	with open('THavalon/README.md', 'r') as readme:
+		output += readme.read().replace("\n", "<br>")
+	return output
 
 @app.route('/game1/')
 def game_list_serve():
@@ -122,7 +128,7 @@ def game_serve(number, user):
                 output += "---<br>This game was rolled at " + mtime
                 output += "<br><br>You are viewing the information of: " + user + "<br><br>"
 		output += file.read().replace("\n", "<br>")
-		output += "<br><br> To review the rules and roles of THavalon, click <a href=\"/roles\">here</a>"
+		output += "<br><br> To review the rules and roles of THavalon, click <a href=\"/roles_and_rules\">here</a>"
 	#print(output)
 	if user == "DoNotOpen":
 		output = "Are you sure you wish to see DoNotOpen? <a href=\"/game" + number + "/ReallyDoNotOpen\">Click here to view</a>"
