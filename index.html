@@ -5,10 +5,15 @@
 <style>
 .flex-container {
 	display: flex;
+}
+.flex-justify {
 	justify-content: space-around;
 }
 .game-div {
 	font-size: x-large;
+}
+.data {
+	white-space: pre;
 }
 </style>
 </head>
@@ -94,11 +99,18 @@ $(document).ready(function(){
     $("#rerollgame3").click({param1: 3}, rerollGameFunc);
 });
 </script>
-<h1>THavalon Web App</br></h1>
-Players (use spaces to separate names):<input type="text" id="players"></input></br>
-</br>
-</br>
 <div class="flex-container">
+<div>
+<h1>THavalon Web App</br></h1>
+Players (use spaces to separate names):<input type="text" id="players"></input>
+</div>
+<div>
+</div>
+</div>
+</br>
+</br>
+</br>
+<div class="flex-container flex-justify">
 <div class="game-div">
 <div> --- Game 1 --- </div>
 <div>Last created at: <div id="modified1"></div></div>

@@ -79,6 +79,10 @@ def index_serve():
 def serve_css(file):
 	return send_from_directory('css', file)
 
+@app.route('/roles')
+def display_roles():
+	return send_from_directory('.', 'roles.html')
+
 @app.route('/game1/')
 def game_list_serve():
         files = os.listdir('game1')
@@ -116,7 +120,9 @@ def game_serve(number, user):
                 mtime = str(val.strftime('%H:%M:%S %m/%d/%Y'))
 		output = "--- Game " + str(number)
                 output += "---<br>This game was rolled at " + mtime
-                output += "<br><br>You are viewing the information of: " + user + "<br><br>" + file.read().replace("\n", "<br>")
+                output += "<br><br>You are viewing the information of: " + user + "<br><br>"
+		output += file.read().replace("\n", "<br>")
+		output += "<br><br> To review the rules and roles of THavalon, click <a href=\"/roles\">here</a>"
 	#print(output)
 	if user == "DoNotOpen":
 		output = "Are you sure you wish to see DoNotOpen? <a href=\"/game" + number + "/ReallyDoNotOpen\">Click here to view</a>"
