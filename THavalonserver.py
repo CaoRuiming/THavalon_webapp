@@ -73,7 +73,13 @@ def crossdomain(origin=None, methods=None, headers=None, max_age=21600,
 @app.route('/', methods=['GET', 'OPTIONS'])
 #@crossdomain(origin='*')
 def index_serve():
-	return send_from_directory('.', 'index.html')
+        files_with_path = os.listdir('THavalon/roles')
+	files = []
+	for x in files_with_path:
+		files.append(os.path.splitext(x)[0])
+	files = sorted(files)
+        return render_template('index.html', files=files)
+	#return send_from_directory('.', 'index.html')
 
 @app.route('/css/<file>')
 def serve_css(file):
@@ -151,6 +157,7 @@ def game_get_time():
 def main():
         gameroom = request.args.getlist('gameroom')
 	players = request.args.getlist('player')
+	roles = request.args.getlist('role')
 	if(len(players) == 0):
 		path = "game1"
 		if(gameroom == 2):
@@ -161,8 +168,7 @@ def main():
 		for p in currentPlayers:
 			if(p != "start" and p != "DoNotOpen"):
 				players.append(p)
-	thavalon.run_THavalon(players, gameroom)
-	return 'called script'
+	return thavalon.run_THavalon(players, gameroom, roles)
 			
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', threaded=True)

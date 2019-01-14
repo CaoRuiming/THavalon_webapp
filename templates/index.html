@@ -6,6 +6,9 @@
 .flex-container {
 	display: flex;
 }
+.column3 {
+	column-count: 3;
+}
 .flex-justify {
 	justify-content: space-around;
 }
@@ -19,20 +22,30 @@
 </head>
 <body>
 <script>
+
 function rerollGameFunc(event){
             gameNum = event.data.param1;
 	    console.log("Rerolling Game" + gameNum.toString());
 	    url = "http://www.techhouse.org:5000/thavalon?"
             url += "&gameroom=" + gameNum;
+	    $.each($(".list-roles:checkbox:checked"), function(){            
+		url+="&role=" + $(this).val();
+            });
+			console.log("Request");
+			console.log(url);
 	    $.ajax({
 		    headers: { 'Access-Control-Allow-Origin' : '*' },
 		    url: url,
 		    type: "get",
 		    success: function (response) {
-			console.log("Success");
-    			populateGameTime(1);
-    			populateGameTime(2);
-    			populateGameTime(3);
+			if(response == "Success"){
+				$("#error-box").text("");	
+    				populateGameTime(1);
+    				populateGameTime(2);
+    				populateGameTime(3);
+			} else {
+				$("#error-box").text(response);	
+			}
 		    },
 		    error: function (response) {
 			console.log("Error");
@@ -50,15 +63,30 @@ function rerollGameFunc(event){
 		url += "&player=" + players[i];
 	    }
             url += "&gameroom=" + gameNum;
+	    $.each($(".list-roles:checkbox:checked"), function(){            
+		url+="&role=" + $(this).val();
+            });
+	    /*checkedRoles = $('.list-roles:checkbox:checked');
+	    for(i = 0; i < checkedRoles.length; i++){
+		url+="&role=" + checkedRoles[i];
+	    }*/
+			console.log("Request");
+			console.log(url);
 	    $.ajax({
 		    headers: { 'Access-Control-Allow-Origin' : '*' },
 		    url: url,
 		    type: "get",
 		    success: function (response) {
 			console.log("Success");
-    			populateGameTime(1);
-    			populateGameTime(2);
-    			populateGameTime(3);
+			console.log(response);
+			if(response == "Success"){
+				$("#error-box").text("");	
+    				populateGameTime(1);
+    				populateGameTime(2);
+    				populateGameTime(3);
+			} else {
+				$("#error-box").text(response);	
+			}
 		    },
 		    error: function (response) {
 			console.log("Error");
@@ -99,12 +127,19 @@ $(document).ready(function(){
     $("#rerollgame3").click({param1: 3}, rerollGameFunc);
 });
 </script>
-<div class="flex-container">
+<div class="flex-container flex-justify">
 <div>
 <h1>THavalon Web App</br></h1>
 Players (use spaces to separate names):<input type="text" id="players"></input>
+<font color="red"><div id="error-box"></div></font>
 </div>
 <div>
+	<h2> Select desired roles (no selection uses automatic roles for given number of players): </h2>
+<div class="column3">
+	{% for file in files %}
+	<div class="game-div"><input type="checkbox" name="{{ file }}" class="list-roles" value="{{ file }}">{{ file }}</input></div>
+	{% endfor %}
+</div>
 </div>
 </div>
 </br>
@@ -114,28 +149,28 @@ Players (use spaces to separate names):<input type="text" id="players"></input>
 <div class="game-div">
 <div> --- Game 1 --- </div>
 <div>Last created at: <div id="modified1"></div></div>
-<button id="newgame" type="button">Create New Game 1</button>
-<button id="rerollgame" type="button">Reroll Game 1</button>
+<button id="newgame" class="game-div" type="button">Create New Game 1</button>
+<button id="rerollgame" class="game-div" type="button">Reroll Game 1</button>
 <form action="http://techhouse.org:5000/game1">
-	<input type="submit" value="View Game 1" />
+	<input type="submit" class="game-div" value="View Game 1" />
 </form>
 </div>
 <div class="game-div">
 <div> --- Game 2 --- </div>
 <div>Last created at:<div id="modified2"></div></div>
-<button id="newgame2" type="button">Create New Game 2</button>
-<button id="rerollgame2" type="button">Reroll Game 2</button>
+<button id="newgame2" class="game-div" type="button">Create New Game 2</button>
+<button id="rerollgame2" class="game-div" type="button">Reroll Game 2</button>
 <form action="http://techhouse.org:5000/game2">
-	<input type="submit" value="View Game 2" />
+	<input type="submit" class="game-div" value="View Game 2" />
 </form>
 </div>
 <div class="game-div">
 <div> --- Game 3 --- </div>
 <div>Last created at:<div id="modified3"></div></div>
-<button id="newgame3" type="button">Create New Game 3</button>
-<button id="rerollgame3" type="button">Reroll Game 3</button>
+<button id="newgame3" class="game-div" type="button">Create New Game 3</button>
+<button id="rerollgame3" class="game-div" type="button">Reroll Game 3</button>
 <form action="http://techhouse.org:5000/game3">
-	<input type="submit" value="View Game 3" />
+	<input type="submit" class="game-div" value="View Game 3" />
 </form>
 </div>
 </div>
